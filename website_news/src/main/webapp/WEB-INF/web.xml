@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+
+	<display-name>web of your</display-name>
+	<!-- Welcome File List -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!--Kích hoạt CDi để quản lý các bean được quản lý bởi CDI trong ứng dụng của bạn. -->
+	<listener>
+		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+	</listener>
+	<!-- Định nghĩa filter sitemesh ==>có filter nào là phải config trong web.xml-->
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern> <!-- Thực hiện lọc vs tất cả url và mỗi url nó chọn đúng template đã đc config 
+			và bind vào trang web(home.jps) thuộc url đó -->
+	</filter-mapping>
+	<!-- Filter của servlet filter dùng để authorization.Khai báo file vào đây filter nó mới hoạt động và class chứa filter này không cần gọi method khi có request nó tự động lọc-->
+	<filter>
+		<filter-name>ServletFilter</filter-name>
+		<filter-class>com.webtutorial.filter.AuthorizationFilter</filter-class> <!--ĐƯỜNG DẪN TỚI LINK CỦA CLASS FILTER -->
+	</filter>
+	<filter-mapping>
+		<filter-name>ServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- tắt sesion của js trên url của chôm -->
+	<!--	<session-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config> -->
+	
+	
+</web-app>

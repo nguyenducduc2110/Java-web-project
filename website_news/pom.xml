@@ -1,0 +1,158 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.WebTutorial</groupId>
+	<artifactId>WebTutorialll</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
+<!--======>KHI vừa cấu hình xong web.xml các thứ muốn chạy project thì phải gõ:mvn clean install là Thực hiện việc build dự án trên terminal(click project + showin +termianl) và sau đó nó sinh ra file war để mỗi lần run thì nó chỉ cần chạy file này  -->
+	<!-- Cấu hình cho JDK 8 -->
+	<properties>
+		<!--Khi muốn thay đổi version of all các spring ở dưới chỉ cần thay chỗ này  -->
+		<springframework.version>4.3.13.RELEASE</springframework.version>
+		<jsp.api.version>2.0</jsp.api.version>
+		<servlet.api.version>3.1.0</servlet.api.version>
+		<jstl.version>1.2</jstl.version>
+		<sitemesh.version>2.4.2</sitemesh.version>
+		<mysql.version>8.0.33</mysql.version>
+		<weld.servlet.version>1.1.0.Final</weld.servlet.version>
+		<!-- Phiên bản java trong lib của maven phải giống jdk thì nó mới complie đc-->
+		<!-- Đây là việc config cho lib của maven là 1.8 -->
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+	<!--all framework of Spring -->
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-core</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-web</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-webmvc</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-tx</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-orm</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-context</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+	   <dependency>
+	      <groupId>org.springframework</groupId>
+	      <artifactId>spring-context-support</artifactId>
+	      <version>${springframework.version}</version>
+	   </dependency>
+		<!-- Servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp.api.version}</version>
+		</dependency>
+		<!-- JSP API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+		</dependency>
+		<!-- JSTL lib -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!-- Sitemesh -->
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>${sitemesh.version}</version>
+		</dependency>
+		<!-- Driver MySQL là thư viện để có api(connect, statement,...) làm việc 
+			giữa java và database -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>${weld.servlet.version}</version>
+		</dependency>
+		<!--Begin lib of json -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!--end json -->
+		<dependency>
+			<!--Cung cấp BeanUtil Dùng để ánh xạ key cùng tên với thuộc tính của object 
+				để map value of key cho thuộc tính VD:class FormUtil -->
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		<!-- Cung cấp method isNotBlank() của class StringUtils vừa check null vừa check space -->
+		<!-- VD: 		if( pageable.getSorter() != null && StringUtils.isNotBlank(pageable.getSorter().getSortBy()) && StringUtils.isNotBlank(pageable.getSorter().getSortBy())) -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.14.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<!-- Plugin để build và package -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version> <!-- Phiên bản plugin -->
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
